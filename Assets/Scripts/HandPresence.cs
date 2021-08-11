@@ -6,21 +6,20 @@ using UnityEngine.XR;
 public class HandPresence : MonoBehaviour
 {
     [SerializeField] List<GameObject> controllerPrefabs;
+    [SerializeField] InputDeviceCharacteristics inputDeviceCharacteristics;
     InputDevice targetDevice;
     GameObject spawnedController;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetDevices(1.0f));
+
     }
 
-    IEnumerator GetDevices(float delayTime)
+    void TryInitializeXRDevices()
     {
-        yield return new WaitForSeconds(delayTime);
         List<InputDevice> devices = new List<InputDevice>();
-        InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
-        InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, devices);
+        InputDevices.GetDevicesWithCharacteristics(inputDeviceCharacteristics, devices);
 
         foreach (var item in devices)
         {
@@ -46,10 +45,17 @@ public class HandPresence : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripButtonValue);
-        if (gripButtonValue)
+        if (!targetDevice.isValid)
         {
-            Debug.Log("Pressing Grip Button");
+            TryInitializeXRDevices();
+        }
+        else
+        {
+            targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripButtonValue);
+            if (gripButtonValue)
+            {
+                Debug.Log("Pressing Grip Button");
+            }
         }
     }
 }
