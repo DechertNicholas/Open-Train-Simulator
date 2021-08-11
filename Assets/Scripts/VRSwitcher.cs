@@ -38,7 +38,12 @@ public class VRSwitcher : MonoBehaviour
         Debug.Log("Checking for unity editor environment");
         if (GetArg(forceVR))
         {
-            Debug.Log("Looks like we're in the editor, not touching VR settings");
+            Debug.Log("Looks like we're in the editor");
+            if (XRGeneralSettings.Instance.Manager.activeLoader == null)
+            {
+                Debug.Log("XRGeneralSettings.Instance.Manager.activeLoader is null, disabling VR components");
+                DisableVRComponents();
+            }
         }
         else
         {
@@ -62,11 +67,16 @@ public class VRSwitcher : MonoBehaviour
             else 
             {
                 Debug.Log("Did not find VR arg, starting in 2D");
-                // Remove VR components from the game, as they won't be used
-                Debug.Log("Disabling VR Controllers");
-                leftController.SetActive(false);
-                rightController.SetActive(false);
+                DisableVRComponents();
             }
         }
+    }
+
+    void DisableVRComponents()
+    {
+        // Remove VR components from the game, as they won't be used
+        Debug.Log("Disabling VR Controllers");
+        leftController.SetActive(false);
+        rightController.SetActive(false);
     }
 }
