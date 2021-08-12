@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] PlayerControls playerControls;
+    [SerializeField] OTSControls otsControls;
     public static bool GameIsPaused = false;
 
     public void DoEscapeMenu(InputAction.CallbackContext obj)
@@ -26,7 +26,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        playerControls.playerInputActions.Player.Enable();
+        otsControls.Player.Enable();
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         Debug.Log("ResumeGame finished");
@@ -35,9 +35,9 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         Cursor.lockState = CursorLockMode.None;
-        playerControls.playerInputActions.Player.Disable();
-        Debug.Log("Player Controls State: " + playerControls.playerInputActions.Player.enabled);
-        Debug.Log("UI Controls State: " + playerControls.playerInputActions.UI.enabled);
+        otsControls.Player.Disable();
+        Debug.Log("Player Controls State: " + otsControls.Player.enabled);
+        Debug.Log("UI Controls State: " + otsControls.UI.enabled);
         pauseMenuUI.SetActive(true);
         GameIsPaused = true;
     }

@@ -17,12 +17,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] PauseMenu pauseMenu;
     bool isGrounded;
     [SerializeField] float jumpHeight = 2.5f;
-    [SerializeField] public PlayerInputActions playerInputActions;
+    [SerializeField] public OTSControls otsControls;
     float xRotation = 0f;
 
     private void Awake() 
     {
-        playerInputActions = new PlayerInputActions();
+        otsControls = new OTSControls();
     }
 
     private void Start()
@@ -32,16 +32,16 @@ public class PlayerControls : MonoBehaviour
 
     private void OnEnable() 
     {
-        playerInputActions.Player.Movement.performed += DoMove;
-        playerInputActions.Player.Jump.performed += DoJump;
-        playerInputActions.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
+        otsControls.Player.Movement.performed += DoMove;
+        otsControls.Player.Jump.performed += DoJump;
+        otsControls.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
 
-        playerInputActions.Enable();
+        otsControls.Enable();
     }
 
     private void DoMove(InputAction.CallbackContext obj)
     {
-        Debug.Log("Movement Values: " + playerInputActions.Player.Movement.ReadValue<Vector2>());
+        Debug.Log("Movement Values: " + otsControls.Player.Movement.ReadValue<Vector2>());
     }
 
     private void DoJump(InputAction.CallbackContext obj)
@@ -54,7 +54,7 @@ public class PlayerControls : MonoBehaviour
 
     private void OnDisable() 
     {
-        playerInputActions.Disable();
+        otsControls.Disable();
     }
 
     void Update()
@@ -67,8 +67,8 @@ public class PlayerControls : MonoBehaviour
         }
 
         // Player look
-        float mouseX = playerInputActions.Player.Camera.ReadValue<Vector2>().x;
-        float mouseY = playerInputActions.Player.Camera.ReadValue<Vector2>().y;
+        float mouseX = otsControls.Player.Camera.ReadValue<Vector2>().x;
+        float mouseY = otsControls.Player.Camera.ReadValue<Vector2>().y;
         
         // xRotation and mouseY are not naming mistakes, camera up/down is the X axis, but on the mouse it is Y
         // use -= because positive on camera X is "down", so invert the value to get the expected behavior of "up"
@@ -79,8 +79,8 @@ public class PlayerControls : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX * Time.deltaTime);
 
         // Player move (z and y are not mistakes, same as above)
-        float moveX = playerInputActions.Player.Movement.ReadValue<Vector2>().x;
-        float moveZ = playerInputActions.Player.Movement.ReadValue<Vector2>().y;
+        float moveX = otsControls.Player.Movement.ReadValue<Vector2>().x;
+        float moveZ = otsControls.Player.Movement.ReadValue<Vector2>().y;
 
         // transform is local to the attached unity object (PlayerCharacter object)
         Vector3 move = transform.right * moveX + transform.forward * moveZ;

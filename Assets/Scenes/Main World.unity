@@ -506,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - {fileID: -944628639613478452, guid: e92d005a7b7ce8e449a75a28d90912c1, type: 3}
 --- !u!114 &65630186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,6 +1687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 1718158791}
   rightController: {fileID: 1467081148}
+  canvas: {fileID: 0}
 --- !u!1 &916179394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,7 +2116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1305403277}
-  playerControls: {fileID: 65630183}
 --- !u!114 &1355120951
 MonoBehaviour:
   m_ObjectHideFlags: 0
