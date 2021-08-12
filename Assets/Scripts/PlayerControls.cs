@@ -5,19 +5,31 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    #region Player Components
+    [Header("Player Components")]
     [SerializeField] Transform playerBody;
     [SerializeField] CharacterController characterController;
     [SerializeField] Camera playerCamera;
+    #endregion
+    #region Player Settings
+    [Header("Player Settings")]
     [SerializeField] float speed = 2.5f;
     [SerializeField] float gravity = -9.81f;
-    Vector3 velocity;
+    [SerializeField] float jumpHeight = 2.5f;
+    #endregion
+    #region Ground Settings
+    [Header("Ground Settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
+    #endregion
+    #region Other Components
+    [Header("Other Components")]
     [SerializeField] PauseMenu pauseMenu;
+    public OTSControls otsControls;
+    #endregion
     bool isGrounded;
-    [SerializeField] float jumpHeight = 2.5f;
-    [SerializeField] public OTSControls otsControls;
+    Vector3 velocity;
     float xRotation = 0f;
 
     private void Awake() 
@@ -37,6 +49,11 @@ public class PlayerControls : MonoBehaviour
         otsControls.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
 
         otsControls.Enable();
+    }
+
+    public OTSControls GetControls()
+    {
+        return this.otsControls;
     }
 
     private void DoMove(InputAction.CallbackContext obj)
@@ -67,8 +84,8 @@ public class PlayerControls : MonoBehaviour
         }
 
         // Player look
-        float mouseX = otsControls.Player.Camera.ReadValue<Vector2>().x;
-        float mouseY = otsControls.Player.Camera.ReadValue<Vector2>().y;
+        float mouseX = otsControls.Player.Look.ReadValue<Vector2>().x;
+        float mouseY = otsControls.Player.Look.ReadValue<Vector2>().y;
         
         // xRotation and mouseY are not naming mistakes, camera up/down is the X axis, but on the mouse it is Y
         // use -= because positive on camera X is "down", so invert the value to get the expected behavior of "up"

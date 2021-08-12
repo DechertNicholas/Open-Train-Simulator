@@ -1,12 +1,12 @@
 {
-    "name": "OTS Controls",
+    "name": "OTSControls",
     "maps": [
         {
             "name": "Player",
             "id": "e9ef31a2-f844-4608-a4fe-dde863ac2ec6",
             "actions": [
                 {
-                    "name": "Camera",
+                    "name": "Look",
                     "type": "Value",
                     "id": "3cbe67e1-a651-409e-aeda-cfbea6d6b021",
                     "expectedControlType": "Vector2",
@@ -15,11 +15,11 @@
                 },
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "cc795f27-59e9-4d5b-96c4-26b28360bce1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "Jump",
@@ -49,6 +49,14 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "3bafe769-529f-4d64-a795-56b86dd04426",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "1e54332c-2db9-4f0a-b57b-b947b11ec3df",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -156,12 +164,67 @@
                 },
                 {
                     "name": "",
+                    "id": "ea336509-847d-4ab3-9b14-c21321030cfc",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85f3d450-c6ef-43ed-b62f-ebed09027358",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d89d49a2-51e1-4069-8197-869721755b5b",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
-                    "action": "Camera",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1aeddeb-2825-4d7f-98e9-cff2686f81ce",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1080900-fb61-463d-86ad-870bbb2578a3",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb52618a-d7d3-4ffa-826b-749d09c73094",
+                    "path": "<XRController>{RightHand}/gripPressed",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -257,7 +320,7 @@
                     "id": "24a00cf2-9456-4ec8-939a-a63f50a73de0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -685,7 +748,18 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "EscapeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f94d6804-d62e-412c-8c2e-a9fd15a45485",
+                    "path": "<XRController>{RightHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
                     "action": "EscapeMenu",
                     "isComposite": false,
                     "isPartOfComposite": false

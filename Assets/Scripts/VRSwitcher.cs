@@ -7,7 +7,7 @@ public class VRSwitcher : MonoBehaviour
 {
     [SerializeField] GameObject leftController;
     [SerializeField] GameObject rightController;
-    [SerializeField] Canvas canvas;
+    [SerializeField] Canvas menuCanvas;
     public void Awake()
     {
         StartCoroutine(StartXRCoroutine());
@@ -86,6 +86,6 @@ public class VRSwitcher : MonoBehaviour
         rightController.SetActive(false);
 
         Debug.Log("Configuring menu canvas for 2D");
-        canvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        menuCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
     }
 }
