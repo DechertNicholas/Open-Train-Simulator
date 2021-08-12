@@ -14,9 +14,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] PauseMenu pauseMenu;
     bool isGrounded;
     [SerializeField] float jumpHeight = 2.5f;
-    private PlayerInputActions playerInputActions;
+    [SerializeField] public PlayerInputActions playerInputActions;
     float xRotation = 0f;
 
     private void Awake() 
@@ -33,6 +34,7 @@ public class PlayerControls : MonoBehaviour
     {
         playerInputActions.Player.Movement.performed += DoMove;
         playerInputActions.Player.Jump.performed += DoJump;
+        playerInputActions.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
 
         playerInputActions.Enable();
     }
