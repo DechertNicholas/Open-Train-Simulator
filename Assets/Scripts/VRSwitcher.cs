@@ -7,6 +7,7 @@ public class VRSwitcher : MonoBehaviour
 {
     [SerializeField] GameObject leftController;
     [SerializeField] GameObject rightController;
+    [SerializeField] Canvas menuCanvas;
     public void Awake()
     {
         StartCoroutine(StartXRCoroutine());
@@ -33,42 +34,47 @@ public class VRSwitcher : MonoBehaviour
     // https://docs.unity3d.com/Packages/com.unity.xr.management@4.0/manual/EndUser.html
     public IEnumerator StartXRCoroutine()
     {
-        var enableVRArg = "--enable-vr";
-        var forceVR = "-useHub";
+        var enableXRArg = "--enable-vr";
+        var inEditor = "-useHub";
         Debug.Log("Checking for unity editor environment");
-        if (GetArg(forceVR))
+        if (GetArg(inEditor))
         {
             Debug.Log("Looks like we're in the editor");
             if (XRGeneralSettings.Instance.Manager.activeLoader == null)
             {
-                Debug.Log("XRGeneralSettings.Instance.Manager.activeLoader is null, disabling VR components");
+                Debug.Log("XRGeneralSettings.Instance.Manager.activeLoader is null, disabling XR components");
                 DisableVRComponents();
             }
         }
         else
         {
             // Only run the code block when we want VR
-            Debug.Log("Looking if VR should enable");
-            if (GetArg(enableVRArg)) 
+            Debug.Log("Looking if XR should enable");
+            if (GetArg(enableXRArg)) 
             {
-                Debug.Log("Initializing XR...");
-                yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
-
-                if (XRGeneralSettings.Instance.Manager.activeLoader == null)
-                {
-                    Debug.LogError("Initializing XR Failed. Check Editor or Player log for details.");
-                }
-                else
-                {
-                    Debug.Log("Starting XR...");
-                    XRGeneralSettings.Instance.Manager.StartSubsystems();
-                }
+                yield return EnableXR();
             } 
             else 
             {
-                Debug.Log("Did not find VR arg, starting in 2D");
+                Debug.Log("Did not find XR arg, starting in 2D");
                 DisableVRComponents();
             }
+        }
+    }
+
+    IEnumerator EnableXR()
+    {
+        Debug.Log("Initializing XR...");
+        yield return XRGeneralSettings.Instance.Manager.InitializeLoader();
+
+        if (XRGeneralSettings.Instance.Manager.activeLoader == null)
+        {
+            Debug.LogError("Initializing XR Failed. Check Editor or Player log for details.");
+        }
+        else
+        {
+            Debug.Log("Starting XR...");
+            XRGeneralSettings.Instance.Manager.StartSubsystems();
         }
     }
 
@@ -78,5 +84,8 @@ public class VRSwitcher : MonoBehaviour
         Debug.Log("Disabling VR Controllers");
         leftController.SetActive(false);
         rightController.SetActive(false);
+
+        Debug.Log("Configuring menu canvas for 2D");
+        menuCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
     }
 }
