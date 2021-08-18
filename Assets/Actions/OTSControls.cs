@@ -20,19 +20,19 @@ public class @OTSControls : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""3cbe67e1-a651-409e-aeda-cfbea6d6b021"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""ScaleVector2(x=10,y=10)"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""cc795f27-59e9-4d5b-96c4-26b28360bce1"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Jump"",
