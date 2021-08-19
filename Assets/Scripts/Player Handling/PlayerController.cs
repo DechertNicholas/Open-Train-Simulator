@@ -93,6 +93,7 @@ public class PlayerController : NetworkBehaviour
         PlayerCamera.gameObject.SetActive(true);
         enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        (GetComponent<PlayerInput>()).enabled = true;
     }
 
     private void GroundedCheck()
