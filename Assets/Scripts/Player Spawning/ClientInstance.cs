@@ -14,6 +14,12 @@ public class ClientInstance : NetworkBehaviour
         NetworkSpawnPlayer();
     }
 
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        NetworkSpawnPlayer();
+    }
+
     [Server]
     private void NetworkSpawnPlayer()
     {

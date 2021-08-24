@@ -9,5 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Scene.unity
     guid: 239b75ae274c3f341a8d6182e15757fd
   m_configObjects:
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 6a1d58806f3cf8641af1cfa9206a092f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: df0d2b5cb9838954ea21260014a44d1d, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 4fd1ea8461a7c6b45a8645117e2206ed, type: 2}
