@@ -7,7 +7,7 @@ public class VRSwitcher : MonoBehaviour
 {
     [SerializeField] GameObject leftController;
     [SerializeField] GameObject rightController;
-    [SerializeField] Canvas menuCanvas;
+    [SerializeField] Canvas menuCanvas = null;
     public void Awake()
     {
         StartCoroutine(StartXRCoroutine());
@@ -81,11 +81,28 @@ public class VRSwitcher : MonoBehaviour
     void DisableVRComponents()
     {
         // Remove VR components from the game, as they won't be used
-        Debug.Log("Disabling VR Controllers");
-        leftController.SetActive(false);
-        rightController.SetActive(false);
+        //Debug.Log("Disabling VR Controllers");
+        // leftController.SetActive(false);
+        // rightController.SetActive(false);
 
         Debug.Log("Configuring menu canvas for 2D");
-        menuCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        if (menuCanvas == null)
+        {
+            Debug.Log("menuCanvas is null, trying to find in world...");
+            menuCanvas = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<Canvas>();
+        }
+        menuCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        // var playerCameras = GameObject.FindGameObjectsWithTag("PlayerCamera");
+        // // need to set the WorldCamera
+        // foreach (var camera in playerCameras)
+        // {
+        //     // for multiplayer, multiple cameras may be present
+        //     // only one should be enabled
+        //     if (camera.activeSelf)
+        //     {
+        //         menuCanvas.worldCamera = camera.GetComponent<Camera>();
+        //         break;
+        //     }
+        // }
     }
 }

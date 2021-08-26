@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - VRTeleLoco
+  - PauseMenu
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX

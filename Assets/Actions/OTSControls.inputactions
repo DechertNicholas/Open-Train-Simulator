@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "EscapeMenu",
+                    "type": "Button",
+                    "id": "90cd3c55-64f9-4c91-85f2-d02ad7e0df8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -227,6 +235,28 @@
                     "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "561a52b2-f0f9-403a-b125-6e952c13332d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "EscapeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cc56fde-9ee3-4124-9708-bec347d47357",
+                    "path": "<XRController>{RightHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "EscapeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -316,7 +346,7 @@
                 },
                 {
                     "name": "EscapeMenu",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "24a00cf2-9456-4ec8-939a-a63f50a73de0",
                     "expectedControlType": "Button",
                     "processors": "",

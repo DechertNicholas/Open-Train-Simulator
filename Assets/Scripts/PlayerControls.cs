@@ -46,7 +46,7 @@ public class PlayerControls : MonoBehaviour
     {
         otsControls.Player.Movement.performed += DoMove;
         otsControls.Player.Jump.performed += DoJump;
-        otsControls.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
+        //otsControls.UI.EscapeMenu.performed += pauseMenu.DoEscapeMenu;
 
         otsControls.Enable();
     }

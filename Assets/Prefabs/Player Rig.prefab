@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2696622277331237374}
   - component: {fileID: 194565185182377769}
   - component: {fileID: 3458638804098498375}
+  - component: {fileID: 6303212721568491284}
   m_Layer: 0
   m_Name: Player Rig
   m_TagString: Player
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4073091716351284229}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0bbf0161301d848805465a1ef020af, type: 3}
+  m_Script: {fileID: 11500000, guid: 038fa7ccbcfff174390f5b770dc98d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
@@ -196,7 +197,7 @@ MonoBehaviour:
   GroundedRadius: 0.5
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   PlayerCamera: {fileID: 4946821423240954118}
   TopClamp: 90
   BottomClamp: -90
@@ -220,6 +221,8 @@ MonoBehaviour:
   sprint: 0
   cursorLocked: 1
   cursorInputForLook: 1
+  pauseMenu: {fileID: 0}
+  playerInput: {fileID: 0}
 --- !u!114 &4073091716351284249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +365,19 @@ MonoBehaviour:
     m_ActionId: 55846c99-3071-4af0-abc5-2ebcd198253d
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4073091716351284254}
+        m_TargetAssemblyTypeName: OTSInputs, Assembly-CSharp
+        m_MethodName: OnEscape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 24a00cf2-9456-4ec8-939a-a63f50a73de0
     m_ActionName: UI/EscapeMenu[/Keyboard/escape]
   - m_PersistentCalls:
@@ -477,6 +492,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 29fb9b65-b5ca-47c2-a93b-9727ccfa7843
     m_ActionName: XRI RightHand/Translate Anchor
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4073091716351284254}
+        m_TargetAssemblyTypeName: OTSInputs, Assembly-CSharp
+        m_MethodName: OnEscape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 90cd3c55-64f9-4c91-85f2-d02ad7e0df8d
+    m_ActionName: Player/EscapeMenu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse and Keyboard
   m_DefaultActionMap: Player
@@ -612,6 +643,21 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 4073091716180277243}
+--- !u!114 &6303212721568491284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073091716351284229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad590225a772be4d84f59efcd87f8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
+  menuCanvas: {fileID: 0}
 --- !u!1 &4073091716398963807
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +770,7 @@ GameObject:
   - component: {fileID: 4946821423240954113}
   m_Layer: 0
   m_Name: Player Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
