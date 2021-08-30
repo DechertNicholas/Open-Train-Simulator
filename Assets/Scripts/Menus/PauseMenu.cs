@@ -9,14 +9,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenuUI;
-    //[SerializeField] PlayerControls playerControls;
     [SerializeField] XRRayInteractor controllerRayInteractor;
     public bool GameIsPaused = false;
     private Dictionary<string,float> referenceRayInteractorValues = new Dictionary<string,float>();
     private PlayerInput playerInput = null;
+    private Canvas menuCanvas = null;
 
     public void DoEscapeMenu()
     {
+        Debug.Log("Escape pressed");
         if (playerInput == null)
         {
             var players = GameObject.FindGameObjectsWithTag("Player");
@@ -30,7 +31,24 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        Debug.Log("Escape pressed");
+        if (controllerRayInteractor == null)
+        {
+            var interactors = GameObject.FindGameObjectsWithTag("XRRayInteractor");
+            foreach (var interactor in interactors)
+            {
+                if (interactor.GetComponent<XRRayInteractor>().enabled)
+                {
+                    controllerRayInteractor = interactor.GetComponent<XRRayInteractor>();
+                    break;
+                }
+            }
+        }
+
+        if (XRSettings.enabled && menuCanvas == null)
+        {
+            SetXRCanvasCamera();
+        }
+
         if (GameIsPaused)
         {
             ResumeGame();
@@ -89,5 +107,25 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetXRCanvasCamera()
+    {
+        menuCanvas = pauseMenuUI.GetComponentInParent<Canvas>();
+        Debug.Log("Setting XR Canvas camera");
+        var playerCameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        // need to set the WorldCamera
+        foreach (var camera in playerCameras)
+        {
+            // for multiplayer, multiple cameras may be present
+            // only one should be enabled
+            if (camera.activeSelf)
+            {
+                Debug.Log("Camera found and set");
+                menuCanvas.worldCamera = camera.GetComponent<Camera>();
+                Debug.Log("Camera is " + menuCanvas.worldCamera);
+                break;
+            }
+        }
     }
 }

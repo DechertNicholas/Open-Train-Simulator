@@ -19,13 +19,6 @@ public class OTSInputs : MonoBehaviour
     [Header("Component References")]
     public PlayerInput playerInput = null;
 
-    //private OTSControls otsControls;
-
-    // private void Awake() 
-    // {
-    //     otsControls = new OTSControls();
-    // }
-
     private void Start()
     {
         if (pauseMenu == null)
@@ -38,16 +31,6 @@ public class OTSInputs : MonoBehaviour
             playerInput = GetComponent<PlayerInput>();
         }
     }
-
-    // private void OnEnable()
-    // {
-    //     Debug.Log("OTSInputs enabled, setting callbacks");
-    //     otsControls.Player.Look.performed += OnLook;
-    //     otsControls.Player.Movement.performed += OnMove;
-    //     otsControls.Player.Sprint.performed += OnSprint;
-    //     otsControls.Player.Jump.performed += OnJump;
-    //     otsControls.UI.EscapeMenu.performed += OnEscape;
-    // }
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
