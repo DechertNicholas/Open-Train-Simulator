@@ -10,16 +10,16 @@
                     "type": "Value",
                     "id": "3cbe67e1-a651-409e-aeda-cfbea6d6b021",
                     "expectedControlType": "Vector2",
-                    "processors": "ScaleVector2(x=10,y=10)",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Movement",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "cc795f27-59e9-4d5b-96c4-26b28360bce1",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 },
                 {
                     "name": "Jump",
@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "EscapeMenu",
+                    "type": "Button",
+                    "id": "90cd3c55-64f9-4c91-85f2-d02ad7e0df8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -227,6 +235,28 @@
                     "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "561a52b2-f0f9-403a-b125-6e952c13332d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "EscapeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cc56fde-9ee3-4124-9708-bec347d47357",
+                    "path": "<XRController>{RightHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "EscapeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -316,7 +346,7 @@
                 },
                 {
                     "name": "EscapeMenu",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "24a00cf2-9456-4ec8-939a-a63f50a73de0",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -639,6 +669,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ecc68149-6eec-4b9b-90d4-8a7311e8dc5f",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27e2fe22-3e15-4433-9ee1-44694a891615",
+                    "path": "*/{Point}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
