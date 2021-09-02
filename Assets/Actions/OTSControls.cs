@@ -1749,6 +1749,96 @@ public class @OTSControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Locomotive"",
+            ""id"": ""0516624e-d3c2-45c5-8bad-f191fdbdbbe2"",
+            ""actions"": [
+                {
+                    ""name"": ""Reverser"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2fabbf2-76ec-4f7d-afdf-0ab366e3eb7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Throttle"",
+                    ""type"": ""Button"",
+                    ""id"": ""84b7d61f-e375-495b-8392-b6a6eeb46048"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WS"",
+                    ""id"": ""f9e9a0d0-2bde-450f-8893-7f6fbd254965"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reverser"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5797939b-9ab9-41d6-95a5-c52fc6bc44b8"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Reverser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9ca2c474-8386-4add-bb69-753d8ab114a1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Reverser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""AD"",
+                    ""id"": ""0fea4b35-cafc-4993-a8c3-23b265ca6856"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""bdceddea-2120-4752-93a9-62fcc25b8faf"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1a6ec981-88a8-44fd-b695-6fdb3cbff6c3"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1838,6 +1928,10 @@ public class @OTSControls : IInputActionCollection, IDisposable
         m_XRIRightHand_Move = m_XRIRightHand.FindAction("Move", throwIfNotFound: true);
         m_XRIRightHand_RotateAnchor = m_XRIRightHand.FindAction("Rotate Anchor", throwIfNotFound: true);
         m_XRIRightHand_TranslateAnchor = m_XRIRightHand.FindAction("Translate Anchor", throwIfNotFound: true);
+        // Locomotive
+        m_Locomotive = asset.FindActionMap("Locomotive", throwIfNotFound: true);
+        m_Locomotive_Reverser = m_Locomotive.FindAction("Reverser", throwIfNotFound: true);
+        m_Locomotive_Throttle = m_Locomotive.FindAction("Throttle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -2384,6 +2478,47 @@ public class @OTSControls : IInputActionCollection, IDisposable
         }
     }
     public XRIRightHandActions @XRIRightHand => new XRIRightHandActions(this);
+
+    // Locomotive
+    private readonly InputActionMap m_Locomotive;
+    private ILocomotiveActions m_LocomotiveActionsCallbackInterface;
+    private readonly InputAction m_Locomotive_Reverser;
+    private readonly InputAction m_Locomotive_Throttle;
+    public struct LocomotiveActions
+    {
+        private @OTSControls m_Wrapper;
+        public LocomotiveActions(@OTSControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reverser => m_Wrapper.m_Locomotive_Reverser;
+        public InputAction @Throttle => m_Wrapper.m_Locomotive_Throttle;
+        public InputActionMap Get() { return m_Wrapper.m_Locomotive; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LocomotiveActions set) { return set.Get(); }
+        public void SetCallbacks(ILocomotiveActions instance)
+        {
+            if (m_Wrapper.m_LocomotiveActionsCallbackInterface != null)
+            {
+                @Reverser.started -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnReverser;
+                @Reverser.performed -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnReverser;
+                @Reverser.canceled -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnReverser;
+                @Throttle.started -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnThrottle;
+                @Throttle.performed -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnThrottle;
+                @Throttle.canceled -= m_Wrapper.m_LocomotiveActionsCallbackInterface.OnThrottle;
+            }
+            m_Wrapper.m_LocomotiveActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Reverser.started += instance.OnReverser;
+                @Reverser.performed += instance.OnReverser;
+                @Reverser.canceled += instance.OnReverser;
+                @Throttle.started += instance.OnThrottle;
+                @Throttle.performed += instance.OnThrottle;
+                @Throttle.canceled += instance.OnThrottle;
+            }
+        }
+    }
+    public LocomotiveActions @Locomotive => new LocomotiveActions(this);
     private int m_MouseandKeyboardSchemeIndex = -1;
     public InputControlScheme MouseandKeyboardScheme
     {
@@ -2463,5 +2598,10 @@ public class @OTSControls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotateAnchor(InputAction.CallbackContext context);
         void OnTranslateAnchor(InputAction.CallbackContext context);
+    }
+    public interface ILocomotiveActions
+    {
+        void OnReverser(InputAction.CallbackContext context);
+        void OnThrottle(InputAction.CallbackContext context);
     }
 }
